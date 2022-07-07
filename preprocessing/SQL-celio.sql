@@ -15,7 +15,7 @@ on d.UserID=b.UserID and d.date=b.Date
 select *
 from DailyDataNew
 
-drop table usernew
+
 SELECT dd1.userid,date,TimeOnPark,parks,Transactions,mindate,maxdate,revenue1,IsSpenderNew,Seniority,ff.InstallDate,city,platform,numofcars
 into usernew
 from DailyDataNew dd1 left join (
