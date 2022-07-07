@@ -112,11 +112,6 @@ order by userid
 
 
 
-
-
-
-
-
 select c.year,c.month,c.day,c.city,c.Seniority,c.users,c.platform,isnull(ftd,0) as ftd,tim.timeonparkday,g.Transactions,z.parkgperday,y.revenueperday
 into excel
 from 
@@ -153,7 +148,19 @@ FROM EXCEL
 
 
 
+#######pre processing a/b test######### 
 
+
+select d.userid,date,TimeOnPark,parks,Transactions,mindate,maxdate,revenue,IsSpenderNew,Seniority,InstallDate,city,platform,numofcars,COALESCE(testgroup,'control') as testgroup
+from DailyDataAll d
+left join (
+select distinct userid,'test' as testgroup from (
+select t.userid
+from DailyDataAll d left join testgroup t on d.userid=t.userid) d
+where d.userid in(select t.userid
+from DailyDataAll d left join testgroup t on d.userid=t.userid)) a
+on a.userid=d.userid
+where date between '2021-01-05' and '2021-01-18'
 
 
 
