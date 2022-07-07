@@ -23,11 +23,11 @@ select a.userid,mindate,maxdate,revenue1
 from Users u left join (select u.userid,TRevenue+sum(revenue) as revenue1
 from Users u join DailyDataNew d on u.UserID=d.userid
 group by u.UserID,TRevenue) a
-on u.UserID=a.UserID left join (select userid,min(date) as mindate
-from DailyDataNew
-where Transactions is not null
-group by userid
-) b
+on u.UserID=a.UserID left join	 (select userid,min(date) as mindate
+					from DailyDataNew
+					where Transactions is not null
+					group by userid
+								) b
 on u.UserID=b.UserID
 left join (select userid,max(date) as maxdate
 from DailyDataNew
