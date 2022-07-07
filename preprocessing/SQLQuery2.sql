@@ -117,7 +117,7 @@ order by userid
 
 
 
-select c.year,c.month,c.day,c.city,c.Seniority,c.users,c.platform,case  when ftd is null then 0 else ftd end as ftd,tim.timeonparkday,g.Transactions,z.parkgperday,y.revenueperday
+select c.year,c.month,c.day,c.city,c.Seniority,c.users,c.platform,isnull(ftd,0) as ftd,tim.timeonparkday,g.Transactions,z.parkgperday,y.revenueperday
 into excel
 from 
 (select year(date) as year ,month(date) as month ,day(date) as day,city,Seniority,platform,count (userid)as users
