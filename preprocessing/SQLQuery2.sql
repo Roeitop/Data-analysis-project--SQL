@@ -61,31 +61,6 @@ from Users) daysq) oi	on dd1.userid=oi.UserID left join (select userid,InstallDa
 
 
 
-
-
-
-
-
-
-select userid,date,Transactions
-from DailyDataNew
-order by userid
-select userid,min(date) as mindate
-from DailyDataNew
-where Transactions is not null
-group by userid
-order by userid
-
-select userid,max(date) as mindate
-from DailyDataNew
-where Transactions is not null
-group by userid
-
-
-
-
-drop  table usernew
-
 select userid,case when a=1 then 'yes' else 'no' end as IsSpenderNew 
 into UserNew 
 from
@@ -179,67 +154,6 @@ FROM EXCEL
 
 
 
-
-select *
-from DailyDataAll
-
-
-
-
-select  year(date) year ,month(date) month,day(date)day,city,Seniority,platform, sum(cast(trevenue as int)) as revenueperday
-from DailyDataAll
-group by year(date) ,month(date) ,day(date),city,Seniority,platform) y
-on y.day=c.day and y.month=c.month and y.Seniority=c.Seniority and c.year=y.year and c.city=y.city and y.platform=c.platform
-
-
-
-
-
-
-
-
-
-select *
-from DailyDataAll 
-order by userid
-
-
-select year(date) year ,month(date) month,day(date)day,city,Seniority,platform, sum(TimeOnPark) as timeonparkday
-from DailyDataAll
-group by year(date)  ,month(date) ,day(date),city,Seniority,platform
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-select 
-
-(select year(a.date) year ,month(a.date) month,day(a.date)day,a.city,a.Seniority,count(rank2) from (
-select da.date, da.userid,da.city,da.Seniority,RANK() over (partition by da.userid order by date )  as 'Rank2'
-from DailyDataAll da
-where ftd=1) a
-where rank2=1
-group by year(date)  ,month(date) ,day(date),city,Seniority) t
 
 
 
