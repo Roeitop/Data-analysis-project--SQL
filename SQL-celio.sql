@@ -61,29 +61,6 @@ from Users) daysq) oi	on dd1.userid=oi.UserID left join (select userid,InstallDa
 
 
 
-select userid,case when a=1 then 'yes' else 'no' end as IsSpenderNew 
-into UserNew 
-from
-(
-select userid,sum(IsSpender) a from
-(
-select  userid , case when bdika is not null then 1 
-else 0 end as IsSpender
-from
-(select userid ,sum(revenue) as bdika
-from DailyDataNew
-group by userid) b
-union
-select UserID, case when IsSpender='yes' then 1 else 0 end
-from Users) b
-group by userid) asa
-select userid,case when daysin between 0 and 730 then '<2 years'
-					when daysin between 730 and 1825 then '2-5 years'
-					else '5+ years' end
-from		
-(select UserID,DATEDIFF(day,InstallDate,'2021-12-31') as daysin
-from Users) daysq
-
 select *
 from UserNew
 
